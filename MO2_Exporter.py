@@ -66,16 +66,16 @@ def main() -> int:
         print(full_msg)
         logfile.write(full_msg + "\n")
 
-    log_write("Verifying inst & Output Path...")
+    log_write("Verifying instance & Output Path...")
 
     for dep in ["mods", "overwrite", "profiles"]:
-        if not os.path.exists(os.path.join(inst_path, dep)):
+        if not os.path.exists(os.path.join(args.instance, dep)):
             log_write("ERROR // ERROR: \t" + f"{dep:>12}" + " is Missing!")
             return -1
     
     log_write("Verifying modlist.txt and plugins.txt...")
     rel_path_modlist = os.path.join("profiles", profile_name, "modlist.txt")
-    abs_path_modlist = os.path.join(args.inst, rel_path_modlist)
+    abs_path_modlist = os.path.join(args.instance, rel_path_modlist)
 
     if os.path.exists(abs_path_modlist):
         log_write(f"\t{abs_path_modlist} is good")
@@ -85,7 +85,7 @@ def main() -> int:
         return -2
 
     rel_path_plugins = os.path.join("profiles", profile_name, "plugins.txt")
-    abs_path_plugins = os.path.join(args.inst, rel_path_plugins)
+    abs_path_plugins = os.path.join(args.instance, rel_path_plugins)
 
     if os.path.exists(abs_path_plugins):
         log_write(f"ERROR // ERROR: \t{abs_path_plugins} is good")
@@ -129,7 +129,7 @@ def main() -> int:
     end_time = datetime.now()
 
     for mod in modlist_complete:
-        mod_path = os.path.join(args.inst, "mods", mod)
+        mod_path = os.path.join(args.instance, "mods", mod)
 
         if os.path.exists(mod_path):
             log_write(f"Copying {mod}...")
