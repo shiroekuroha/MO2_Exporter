@@ -38,7 +38,7 @@ def copy_folder(src_dir, dst_dir):
             continue
 
         if os.path.isdir(src_item):
-            copy_folder(src_item, os.path.join(dst_dir.lower(), item), ignore)
+            copy_folder(src_item, os.path.join(dst_dir.lower(), item))
         else:
             shutil.copy2(src_item, dst_item)
 
@@ -113,7 +113,7 @@ def main() -> int:
                 log_write(f"\t\"{modlist_lines[index][1:]}\" is mod, appending...")
                 modlist_final.append(modlist_lines[index][1:])
 
-    modlist_complete = modlist_complete[::-1]
+    modlist_final = modlist_final[::-1]
             
     final_package_path = args.output
     final_package_data_path = os.path.join(final_package_path, "Data")
@@ -128,7 +128,7 @@ def main() -> int:
     start_time = datetime.now()
     end_time = datetime.now()
 
-    for mod in modlist_complete:
+    for mod in modlist_final:
         mod_path = os.path.join(args.instance, "mods", mod)
 
         if os.path.exists(mod_path):
